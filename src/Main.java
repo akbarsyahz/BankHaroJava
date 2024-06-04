@@ -5,6 +5,6 @@ public class Main {
     public static void main(String[] args){
         BankAccount idandPasswords = new BankAccount();
 
-        LoginPage loginPage = new LoginPage(idandPasswords.getLoginInfo());
+        LoginPage loginPage = new LoginPage();
     }
 }

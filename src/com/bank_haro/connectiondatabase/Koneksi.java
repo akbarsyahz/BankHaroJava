@@ -1,21 +1,26 @@
 package com.bank_haro.connectiondatabase;
-
-import javax.swing.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class Koneksi {
-    Connection koneksi;
+    public Connection con;
+    public Statement ss;
 
-    public static Connection Koneksi() {
+    String driverName = "com.mysql.jdbc.Driver";
+    String url = "jdbc:mysql://localhost:3306/bankjava";
+    String username = "";
+    String password = "";
+
+    public void getKoneksi() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            Connection koneksi = DriverManager.getConnection("jdbc:mysql://localhost/BankJava", "123", "123");
+            con = (Connection) DriverManager.getConnection(url, username, password);
+            System.out.println("Koneksi Sukses ");
+            ss = (Statement) con.createStatement();
 
-            return koneksi;
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e);
-            return null;
+        } catch (SQLException ex) {
+            System.out.println("Koneksi Gagal");
         }
     }
 }

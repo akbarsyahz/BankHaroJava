@@ -1,5 +1,7 @@
 package com.bank_haro.dashboard;
 
+import com.bank_haro.connectiondatabase.Koneksi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,6 +9,8 @@ import java.awt.event.ActionListener;
 
 public class WelcomePage implements ActionListener {
 
+
+    Koneksi con = new Koneksi();
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Halo!!");
     JLabel moneyLabel = new JLabel("RP");

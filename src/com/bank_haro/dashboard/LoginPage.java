@@ -1,9 +1,15 @@
 package com.bank_haro.dashboard;
 
+import com.bank_haro.connectiondatabase.Koneksi;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.HashMap;
 
 public class LoginPage implements ActionListener {
@@ -17,11 +23,12 @@ public class LoginPage implements ActionListener {
     JLabel userIDLabel = new JLabel("userID:");
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
-    HashMap<String,String> logininfo = new HashMap<String,String>();
+    Connection con;
+    Statement stat;
+    ResultSet rs;
+    String sqlCek;
 
-    public LoginPage(HashMap<String,String> loginInfoOriginal){
-
-        logininfo = loginInfoOriginal;
+    public LoginPage(){
 
         titleLabel.setBounds(155, 30, 200, 25);
         titleLabel.setFont(new Font(null,Font.BOLD,25));
@@ -67,24 +74,27 @@ public class LoginPage implements ActionListener {
         }
 
         if(e.getSource()==loginButton) {
+            Koneksi koneksi = new Koneksi();
+            koneksi.getKoneksi();
+            con = koneksi.con;
+            stat = (Statement) koneksi.ss;
+            try {
+                String userID = userIDField.getText();
+                String password = String.valueOf(userPasswordField.getPassword());
+                sqlCek = "SELECT * FROM users WHERE username='"+userID+"' AND password='"+password+"'";
+                rs = stat.executeQuery(sqlCek);
 
-            String userID = userIDField.getText();
-            String password = String.valueOf(userPasswordField.getPassword());
-
-            if (logininfo.containsKey(userID)) {
-                if (logininfo.get(userID).equals(password)) {
+                if (rs.next()) {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
                     WelcomePage welcomePage = new WelcomePage(userID);
                 } else {
                     messageLabel.setForeground(Color.red);
-                    messageLabel.setText("Wrong password");
+                    messageLabel.setText("username or password wrong");
                 }
-
-            } else {
-                messageLabel.setForeground(Color.red);
-                messageLabel.setText("username not found");
+            }catch (SQLException ex){
+                System.out.println("Koneksi Gagal " + ex);
             }
         }
     }

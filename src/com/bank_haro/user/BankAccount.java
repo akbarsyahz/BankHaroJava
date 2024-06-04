@@ -11,9 +11,12 @@ import java.util.HashMap;
 
 public class BankAccount implements User{
 
+    Koneksi koneksi = new Koneksi();
     public static int money;
     Connection con;
     Statement stat;
+    public ResultSet rs;
+
 
 
     public static int withDraw()
@@ -39,18 +42,12 @@ public class BankAccount implements User{
     @Override
     public void accountUser(String userID) {
         try{
-            Koneksi koneksi = new Koneksi();
             koneksi.getKoneksi();
             con = koneksi.con;
             stat = (Statement) koneksi.ss;
             String sql = "SELECT * FROM users WHERE " + userID;
             Statement statement = con.createStatement();
-            ResultSet rs = statement.executeQuery(sql);
-
-            Object[] data = {
-                    rs.getString("username"),
-                    rs.getString("money"),
-            };
+            rs = statement.executeQuery(sql);
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }

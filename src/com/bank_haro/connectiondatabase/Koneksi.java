@@ -18,7 +18,6 @@ public class Koneksi {
             con = (Connection) DriverManager.getConnection(url, username, password);
             System.out.println("Koneksi Sukses ");
             ss = (Statement) con.createStatement();
-
         } catch (SQLException ex) {
             System.out.println("Koneksi Gagal");
         }

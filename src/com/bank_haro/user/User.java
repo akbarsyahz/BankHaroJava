@@ -1,5 +1,6 @@
-//package com.bank_haro.user;
-//
-//public class User {
-//    public String
-//}
+package com.bank_haro.user;
+
+public interface User {
+    public void accountUser();
+    public void moneyUser();
+}

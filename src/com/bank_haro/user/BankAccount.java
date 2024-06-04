@@ -12,11 +12,8 @@ import java.util.HashMap;
 public class BankAccount implements User{
 
     public static int money;
-
-
-    public BankAccount(){
-
-    }
+    Connection con;
+    Statement stat;
 
 
     public static int withDraw()
@@ -35,17 +32,27 @@ public class BankAccount implements User{
 
     public static void depositMoney()
     {
-
+        System.out.println("Hallo");
     }
 
 
     @Override
-    public void accountUser() {
+    public void accountUser(String userID) {
+        try{
+            Koneksi koneksi = new Koneksi();
+            koneksi.getKoneksi();
+            con = koneksi.con;
+            stat = (Statement) koneksi.ss;
+            String sql = "SELECT * FROM users WHERE " + userID;
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
 
-    }
-
-    @Override
-    public void moneyUser() {
-
+            Object[] data = {
+                    rs.getString("username"),
+                    rs.getString("money"),
+            };
+        }catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

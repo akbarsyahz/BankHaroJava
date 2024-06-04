@@ -1,22 +1,25 @@
 package com.bank_haro.dashboard;
 
 import com.bank_haro.connectiondatabase.Koneksi;
+import com.bank_haro.user.BankAccount;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class WelcomePage implements ActionListener {
+public class WelcomePage extends BankAccount implements ActionListener {
 
-
-    Koneksi con = new Koneksi();
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Halo!!");
     JLabel moneyLabel = new JLabel("RP");
     JLabel moneyTotalLabel  = new JLabel("Total");
 
-    public WelcomePage(String userID){
+    public WelcomePage(String userID)
+    {
+        WelcomePage userAccount = new WelcomePage(userID);
+        userAccount.accountUser(userID);
+
         welcomeLabel.setBounds(100,30,200,35);
         welcomeLabel.setFont(new Font(null, Font.PLAIN, 25));
         welcomeLabel.setText("Hello "+ userID);

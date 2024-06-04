@@ -2,8 +2,10 @@ package com.bank_haro.dashboard;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class WelcomePage {
+public class WelcomePage implements ActionListener {
 
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Halo!!");
@@ -27,5 +29,10 @@ public class WelcomePage {
         frame.setSize(420, 420);
         frame.setLayout(null);
         frame.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
     }
 }

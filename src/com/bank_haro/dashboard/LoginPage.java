@@ -1,17 +1,13 @@
 package com.bank_haro.dashboard;
 
-import com.bank_haro.connectiondatabase.Koneksi;
-import com.bank_haro.user.BankAccount;
+import com.bank_haro.bankaccount.BankAccount;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.HashMap;
 
 public class LoginPage implements ActionListener {
 
@@ -71,7 +67,7 @@ public class LoginPage implements ActionListener {
         }
 
         if(e.getSource()==loginButton) {
-              BankAccount userLogin = new BankAccount();
+              LoginLogic userLogin = new LoginLogic();
             try {
                 String userID = userIDField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());

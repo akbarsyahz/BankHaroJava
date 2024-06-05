@@ -1,6 +1,6 @@
 package com.bank_haro.transaction;
 
-import com.bank_haro.user.BankAccount;
+import com.bank_haro.bankaccount.BankAccount;
 
 import java.math.BigDecimal;
 import java.sql.ResultSet;

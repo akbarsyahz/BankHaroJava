@@ -1,8 +1,7 @@
 package com.bank_haro.dashboard;
 
-import com.bank_haro.connectiondatabase.Koneksi;
 import com.bank_haro.transaction.TransactionPage;
-import com.bank_haro.user.BankAccount;
+import com.bank_haro.bankaccount.BankAccount;
 
 import javax.swing.*;
 import java.awt.*;

@@ -18,6 +18,8 @@ public class BankAccount implements User{
 
 
 
+
+
     public static int withDraw()
     {
         if(money <= 10.000)
@@ -39,8 +41,18 @@ public class BankAccount implements User{
 
 
     @Override
-    public ResultSet accountUser(String username) {
-        return null;
+    public ResultSet accountUser(String username){
+        try{
+            koneksi.getKoneksi();
+            con = koneksi.con;
+            stat = (Statement) koneksi.ss;
+            sqlCek = "SELECT * FROM users WHERE username='"+username+"'";
+            Statement statement = con.createStatement(); // buat objek statement
+            rs = statement.executeQuery(sqlCek); // eksekusi query dan simpan hasilnya di obj ResultSet
+            return rs;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 
     @Override

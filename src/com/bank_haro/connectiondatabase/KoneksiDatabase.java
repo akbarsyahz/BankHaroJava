@@ -4,7 +4,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class Koneksi {
+public class KoneksiDatabase {
     public Connection con;
     public Statement ss;
 

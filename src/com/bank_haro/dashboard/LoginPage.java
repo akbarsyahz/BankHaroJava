@@ -24,10 +24,6 @@ public class LoginPage implements ActionListener {
     JLabel userIDLabel = new JLabel("userID:");
     JLabel userPasswordLabel = new JLabel("password:");
     JLabel messageLabel = new JLabel();
-    Connection con;
-    Statement stat;
-    ResultSet rs;
-    String sqlCek;
 
     public LoginPage(){
 

@@ -15,31 +15,7 @@ public class BankAccount implements User{
     Statement stat;
     public ResultSet rs;
     String sqlCek;
-
-
-
-
-
-    public static int withDraw()
-    {
-        if(money <= 10.000)
-        {
-            money -= 10; // total yang ingin di tarik;
-        }
-        return money;
-    }
-
-    public static void storeMoney()
-    {
-
-    }
-
-    public static void depositMoney()
-    {
-        System.out.println("Hallo");
-    }
-
-
+    
     @Override
     public ResultSet accountUser(String username){
         try{

@@ -1,6 +1,6 @@
 package com.bank_haro.dashboard;
 
-import com.bank_haro.bankaccount.BankAccount;
+import com.bank_haro.dashboard.logic.LoginLogic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -76,7 +76,7 @@ public class LoginPage implements ActionListener {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();
-                    WelcomePage welcomePage = new WelcomePage(userID);
+                    DashboardPage dashboardPage = new DashboardPage(userID);
                 } else {
                     messageLabel.setForeground(Color.red);
                     messageLabel.setText("username or password wrong");

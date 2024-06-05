@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class WelcomePage extends BankAccount implements ActionListener {
+public class DashboardPage extends BankAccount implements ActionListener {
 
     JFrame frame = new JFrame();
     JLabel welcomeLabel = new JLabel("Halo!!");
@@ -19,7 +19,7 @@ public class WelcomePage extends BankAccount implements ActionListener {
     JButton transactionButton = new JButton("Transaction");
     BankAccount accounDetail = new BankAccount();
 
-    public WelcomePage(String userID){
+    public DashboardPage(String userID){
 
         welcomeLabel.setBounds(100,30,200,35);
         welcomeLabel.setFont(new Font(null, Font.PLAIN, 25));

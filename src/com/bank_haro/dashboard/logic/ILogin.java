@@ -1,4 +1,4 @@
-package com.bank_haro.dashboard;
+package com.bank_haro.dashboard.logic;
 
 import java.sql.ResultSet;
 

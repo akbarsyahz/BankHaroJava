@@ -1,4 +1,4 @@
-package com.bank_haro.dashboard;
+package com.bank_haro.dashboard.logic;
 
 import com.bank_haro.connectiondatabase.Koneksi;
 

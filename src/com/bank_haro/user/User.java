@@ -1,5 +1,8 @@
 package com.bank_haro.user;
 
+import java.sql.ResultSet;
+
 public interface User {
-    void accountUser(String userID);
+    ResultSet accountUser(String username);
+    ResultSet loginLogic(String username, String password);
 }

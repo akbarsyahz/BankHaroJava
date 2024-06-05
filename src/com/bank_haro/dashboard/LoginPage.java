@@ -1,6 +1,7 @@
 package com.bank_haro.dashboard;
 
 import com.bank_haro.connectiondatabase.Koneksi;
+import com.bank_haro.user.BankAccount;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,17 +75,12 @@ public class LoginPage implements ActionListener {
         }
 
         if(e.getSource()==loginButton) {
-            Koneksi koneksi = new Koneksi();
-            koneksi.getKoneksi();
-            con = koneksi.con;
-            stat = (Statement) koneksi.ss;
+              BankAccount userLogin = new BankAccount();
             try {
                 String userID = userIDField.getText();
                 String password = String.valueOf(userPasswordField.getPassword());
-                sqlCek = "SELECT * FROM users WHERE username='"+userID+"' AND password='"+password+"'";
-                rs = stat.executeQuery(sqlCek);
-
-                if (rs.next()) {
+                ResultSet cekLogin = userLogin.loginLogic(userID, password);
+                if (cekLogin.next()) {
                     messageLabel.setForeground(Color.green);
                     messageLabel.setText("Login successful");
                     frame.dispose();

@@ -2,12 +2,10 @@ package com.bank_haro.user;
 
 import com.bank_haro.connectiondatabase.Koneksi;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 
 public class BankAccount implements User{
 
@@ -16,6 +14,7 @@ public class BankAccount implements User{
     Connection con;
     Statement stat;
     public ResultSet rs;
+    String sqlCek;
 
 
 
@@ -40,14 +39,20 @@ public class BankAccount implements User{
 
 
     @Override
-    public void accountUser(String userID) {
+    public ResultSet accountUser(String username) {
+        return null;
+    }
+
+    @Override
+    public ResultSet loginLogic(String username, String password) {
         try{
             koneksi.getKoneksi();
             con = koneksi.con;
             stat = (Statement) koneksi.ss;
-            String sql = "SELECT * FROM users WHERE " + userID;
+            sqlCek = "SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"'";
             Statement statement = con.createStatement();
-            rs = statement.executeQuery(sql);
+            rs = statement.executeQuery(sqlCek);
+            return rs;
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }

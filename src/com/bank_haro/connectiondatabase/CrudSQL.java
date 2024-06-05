@@ -1,6 +1,6 @@
 package com.bank_haro.connectiondatabase;
 
-public class CrudSQL implements CrudInterface{
+public class CrudSQL extends ConnectionSQL implements CrudInterface{
     @Override
     public void getData() {
 

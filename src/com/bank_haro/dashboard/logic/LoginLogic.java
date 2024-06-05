@@ -1,6 +1,6 @@
 package com.bank_haro.dashboard.logic;
 
-import com.bank_haro.connectiondatabase.KoneksiDatabase;
+import com.bank_haro.connectiondatabase.ConnectionDatabase;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ import java.sql.Statement;
 
 public class LoginLogic implements ILogin{
 
-    KoneksiDatabase koneksiDatabase = new KoneksiDatabase();
+    ConnectionDatabase connectionDatabase = new ConnectionDatabase();
     Connection con;
     Statement stat;
     public ResultSet rs;
@@ -18,9 +18,9 @@ public class LoginLogic implements ILogin{
     @Override
     public ResultSet loginLogic(String username, String password) {
         try{
-            koneksiDatabase.getKoneksi();
-            con = koneksiDatabase.con;
-            stat = (Statement) koneksiDatabase.ss;
+            connectionDatabase.getKoneksi();
+            con = connectionDatabase.con;
+            stat = (Statement) connectionDatabase.ss;
             sqlCek = "SELECT * FROM users WHERE username='"+username+"' AND password='"+password+"'";
             Statement statement = con.createStatement();
             rs = statement.executeQuery(sqlCek);

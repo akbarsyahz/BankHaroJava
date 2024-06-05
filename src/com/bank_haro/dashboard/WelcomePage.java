@@ -1,6 +1,7 @@
 package com.bank_haro.dashboard;
 
 import com.bank_haro.connectiondatabase.Koneksi;
+import com.bank_haro.transaction.TransactionPage;
 import com.bank_haro.user.BankAccount;
 
 import javax.swing.*;
@@ -16,6 +17,7 @@ public class WelcomePage extends BankAccount implements ActionListener {
     JLabel welcomeLabel = new JLabel("Halo!!");
     JLabel moneyLabel = new JLabel("RP");
     JLabel moneyTotalLabel  = new JLabel("0");
+    JButton transactionButton = new JButton("Transaction");
     BankAccount accounDetail = new BankAccount();
 
     public WelcomePage(String userID){
@@ -26,6 +28,10 @@ public class WelcomePage extends BankAccount implements ActionListener {
 
         moneyLabel.setBounds(50,100,75,25);
         moneyTotalLabel.setBounds(125,100,200,25);
+
+        transactionButton.setBounds(125,200,150,25);
+        transactionButton.setFocusable(false);
+        transactionButton.addActionListener(this);
 
         try{
             ResultSet detailAccount = accounDetail.accountUser(userID);
@@ -38,6 +44,7 @@ public class WelcomePage extends BankAccount implements ActionListener {
         frame.add(welcomeLabel);
         frame.add(moneyLabel);
         frame.add(moneyTotalLabel);
+        frame.add(transactionButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420, 420);
         frame.setLayout(null);
@@ -46,6 +53,10 @@ public class WelcomePage extends BankAccount implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource() == transactionButton)
+        {
+            frame.dispose();
+            TransactionPage transactionPage = new TransactionPage();
+        }
     }
 }

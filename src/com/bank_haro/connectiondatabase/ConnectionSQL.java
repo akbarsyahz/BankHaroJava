@@ -10,6 +10,10 @@ public class ConnectionSQL implements ConnectionInterface{
     public ResultSet rs;
     String sqlCek;
 
+    ConnectionSQL(){
+
+    }
+
 
     @Override
     public void connect() {
@@ -18,26 +22,6 @@ public class ConnectionSQL implements ConnectionInterface{
 
     @Override
     public void disconnect() {
-
-    }
-
-    @Override
-    public void getData() {
-
-    }
-
-    @Override
-    public void insertData() {
-
-    }
-
-    @Override
-    public void updateData() {
-
-    }
-
-    @Override
-    public void deleteData() {
 
     }
 }

@@ -14,6 +14,7 @@ public class LoginPage implements ActionListener {
     JFrame frame = new JFrame();
     JLabel titleLabel = new JLabel("BANK HARO");
     JButton loginButton = new JButton("Login");
+    JButton registerButton = new JButton("Register");
     JButton resetButton = new JButton("Reset");
     JTextField userIDField = new JTextField();
     JPasswordField userPasswordField = new JPasswordField();
@@ -39,6 +40,10 @@ public class LoginPage implements ActionListener {
         loginButton.setFocusable(false);
         loginButton.addActionListener(this);
 
+        registerButton.setBounds(177,250,100,25);
+        registerButton.setFocusable(false);
+        registerButton.addActionListener(this);
+
         resetButton.setBounds(225,200,100,25);
         resetButton.setFocusable(false);
         resetButton.addActionListener(this);
@@ -51,8 +56,10 @@ public class LoginPage implements ActionListener {
         frame.add(userPasswordField);
         frame.add(loginButton);
         frame.add(resetButton);
+        frame.add(registerButton);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(420,420);
+        frame.setLocationRelativeTo(null);
         frame.setLayout(null);
         frame.setVisible(true);
 
@@ -84,6 +91,9 @@ public class LoginPage implements ActionListener {
             }catch (SQLException ex){
                 System.out.println("Koneksi Gagal " + ex);
             }
+        } else if (e.getSource()==registerButton) {
+            frame.dispose();
+            RegisterPage registerPage = new RegisterPage();
         }
     }
 }

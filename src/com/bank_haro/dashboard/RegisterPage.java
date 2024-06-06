@@ -1,11 +1,14 @@
 package com.bank_haro.dashboard;
 
 import com.bank_haro.dashboard.logic.IRegister;
+import com.bank_haro.dashboard.logic.LoginLogic;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class RegisterPage implements ActionListener {
 
@@ -24,7 +27,7 @@ public class RegisterPage implements ActionListener {
     JLabel messageLabel = new JLabel();
 
     RegisterPage(){
-        titleLabel.setBounds(155, 30, 200, 25);
+        titleLabel.setBounds(155, 30, 200, 35);
         titleLabel.setFont(new Font(null,Font.BOLD,25));
 
         userIDLabel.setBounds(50,100,75,25);
@@ -41,11 +44,11 @@ public class RegisterPage implements ActionListener {
         userAddressField.setBounds(125,200,200,25);
         userNikField.setBounds(125,250,200,25);
 
-        regisButton.setBounds(125,300,150,25);
+        regisButton.setBounds(140,300,150,25);
         regisButton.setFocusable(false);
         regisButton.addActionListener(this);
 
-        resetButton.setBounds(225,200,100,25);
+        resetButton.setBounds(160,350,100,25);
         resetButton.setFocusable(false);
         resetButton.addActionListener(this);
 
@@ -70,7 +73,34 @@ public class RegisterPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e){
+        if(e.getSource()==resetButton) {
+            userIDField.setText("");
+            userPasswordField.setText("");
+            userAddressField.setText("");
+            userNikField.setText("");
+        }
 
+        if(e.getSource()==regisButton) {
+            LoginLogic userLogin = new LoginLogic();
+            try {
+                String userID = userIDField.getText();
+                String password = String.valueOf(userPasswordField.getPassword());
+                String userAddress = userAddressField.getText();
+                String userNik = userNikField.getText();
+                ResultSet cekLogin = userLogin.loginLogic(userID, password);
+                if (cekLogin.next()) {
+                    messageLabel.setForeground(Color.green);
+                    messageLabel.setText("Login successful");
+                    frame.dispose();
+                    DashboardPage dashboardPage = new DashboardPage(userID);
+                } else {
+                    messageLabel.setForeground(Color.red);
+                    messageLabel.setText("username or password wrong");
+                }
+            }catch (SQLException ex){
+                System.out.println("Koneksi Gagal " + ex);
+            }
+        }
     }
 
 

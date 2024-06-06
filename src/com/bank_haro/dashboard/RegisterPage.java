@@ -2,6 +2,7 @@ package com.bank_haro.dashboard;
 
 import com.bank_haro.dashboard.logic.IRegister;
 import com.bank_haro.dashboard.logic.LoginLogic;
+import com.bank_haro.dashboard.logic.RegisterLogic;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,24 +82,32 @@ public class RegisterPage implements ActionListener {
         }
 
         if(e.getSource()==regisButton) {
-            LoginLogic userLogin = new LoginLogic();
+            RegisterLogic register = new RegisterLogic();
+            String userID = userIDField.getText();
+            String password = String.valueOf(userPasswordField.getPassword());
+            String userAddress = userAddressField.getText();
+
+            Long userNik;
             try {
-                String userID = userIDField.getText();
-                String password = String.valueOf(userPasswordField.getPassword());
-                String userAddress = userAddressField.getText();
-                String userNik = userNikField.getText();
-                ResultSet cekLogin = userLogin.loginLogic(userID, password);
-                if (cekLogin.next()) {
-                    messageLabel.setForeground(Color.green);
-                    messageLabel.setText("Login successful");
-                    frame.dispose();
-                    DashboardPage dashboardPage = new DashboardPage(userID);
-                } else {
-                    messageLabel.setForeground(Color.red);
-                    messageLabel.setText("username or password wrong");
-                }
-            }catch (SQLException ex){
-                System.out.println("Koneksi Gagal " + ex);
+                userNik = Long.parseLong(userNikField.getText());
+            } catch (NumberFormatException ex) {
+                throw new IllegalArgumentException("NIK harus berupa angka.");
+            }
+
+            // Validasi panjang NIK
+            if (String.valueOf(userNik).length() != 16) {
+                throw new IllegalArgumentException("NIK harus terdiri dari 16 angka.");
+            }
+
+            boolean isRegistered = register.register(userID, password, userAddress, userNik);
+            if (isRegistered) {
+                messageLabel.setForeground(Color.green);
+                messageLabel.setText("Registration successful");
+                frame.dispose();
+                DashboardPage dashboardPage = new DashboardPage(userID);
+            } else {
+                messageLabel.setForeground(Color.red);
+                messageLabel.setText("Registration failed");
             }
         }
     }

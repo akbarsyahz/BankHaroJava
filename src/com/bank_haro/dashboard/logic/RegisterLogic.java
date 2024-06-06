@@ -10,7 +10,7 @@ public class RegisterLogic implements IRegister{
     CrudSQL connection = new CrudSQL();
 
     @Override
-    public void register(String username, String password, String address, Integer nik) {
+    public boolean register(String username, String password, String address, Long nik) {
         if (username == null || username.isEmpty()) {
             throw new IllegalArgumentException("Username tidak boleh kosong.");
         }
@@ -31,9 +31,10 @@ public class RegisterLogic implements IRegister{
 
         try {
             connection.insertData("users", fields, values);
+            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to register user", e);
+            return false;
         }
     }
 }

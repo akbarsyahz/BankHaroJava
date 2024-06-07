@@ -1,5 +1,9 @@
 package com.bank_haro.transaction;
 
+import com.bank_haro.transaction.subtransaction.DepositPage;
+import com.bank_haro.transaction.subtransaction.EarlierTransactionPage;
+import com.bank_haro.transaction.subtransaction.WithdrawPage;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +12,7 @@ import java.awt.event.ActionListener;
 public class TransactionPage implements ActionListener {
 
     JFrame frame = new JFrame();
-    JLabel titleLabel = new JLabel("PILIH MENU");
+    JLabel titleLabel = new JLabel("MENU");
     JButton withdrawButton = new JButton("WITHDRAW");
     JButton depositButton = new JButton("DEPOSIT");
     JButton earlierTransactionButton = new JButton("Earlier Transaction");
@@ -42,6 +46,17 @@ public class TransactionPage implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getSource()==withdrawButton){
+            frame.dispose();
+            WithdrawPage withdrawPage = new WithdrawPage();
+        } else if (e.getSource()==depositButton) {
+            frame.dispose();
+            DepositPage depositPage = new DepositPage();
+        } else if (e.getSource()==earlierTransactionButton) {
+            frame.dispose();
+            EarlierTransactionPage earlierTransactionPage = new EarlierTransactionPage();
+        }else {
+            throw new RuntimeException();
+        }
     }
 }

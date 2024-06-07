@@ -5,39 +5,59 @@ import com.bank_haro.bankaccount.BankAccount;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Transaction extends BankAccount implements TransactionInterface{
 
     String username;
     BigDecimal money;
     BankAccount account = new Transaction();
-    BigDecimal minMoney = BigDecimal.valueOf(50.000);
+    BigDecimal minMoney = new BigDecimal("100000.50");
 
     public Transaction()
     {
-        try{
+        this.username = username;
+        try {
             ResultSet accountMoney = account.accountUser(username);
-            accountMoney.next();
-            money = accountMoney.getBigDecimal("money");
-        }catch (SQLException e){
+            if (accountMoney.next()) {
+                money = accountMoney.getBigDecimal("money");
+            } else {
+                money = BigDecimal.ZERO;
+            }
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
 
+    public static String formatRupiah(BigDecimal amount) {
+        NumberFormat currencyFormat = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        return currencyFormat.format(amount);
     }
 
     @Override
-    public Integer withDraw() {
-//        money =
-        return 0;
+    public BigDecimal withDraw(BigDecimal amount) {
+        if (money.compareTo(minMoney) >= 0 && money.compareTo(amount) >= 0) {
+            money = money.subtract(amount);
+            return amount;
+        } else {
+            System.out.println("Saldo tidak mencukupi untuk melakukan penarikan atau saldo kurang dari minimum yang diizinkan.");
+            return BigDecimal.ZERO;
+        }
     }
 
     @Override
-    public Integer deposit() {
-        return 0;
+    public BigDecimal deposit(BigDecimal amount) {
+       if (money.compareTo(minMoney) >= 0 && money.compareTo(amount) >= 0){
+           money = money.add(BigDecimal.ONE);
+           return amount;
+       }else{
+           return amount;
+       }
     }
 
     @Override
-    public Integer earlierTransaction() {
-        return 0;
+    public BigDecimal earlierTransaction(BigDecimal amount) {
+        return amount;
     }
 }

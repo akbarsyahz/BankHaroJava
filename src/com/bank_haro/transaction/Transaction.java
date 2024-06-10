@@ -49,10 +49,11 @@ public class Transaction extends BankAccount implements TransactionInterface{
     @Override
     public BigDecimal deposit(BigDecimal amount) {
        if (money.compareTo(minMoney) >= 0 && money.compareTo(amount) >= 0){
-           money = money.add(BigDecimal.ONE);
+           money = money.add(amount);
            return amount;
        }else{
-           return amount;
+           System.out.println("Saldo tidak mencukupi untuk melakukan penarikan atau saldo kurang dari minimum yang diizinkan.");
+           return BigDecimal.ZERO;
        }
     }
 

@@ -10,8 +10,8 @@ public class ConnectionDatabase {
 
     String driverName = "com.mysql.jdbc.Driver";
     String url = "jdbc:mysql://localhost:3306/bankjava";
-    String username = "akbarsyahn";
-    String password = "Akbar2002";
+    String username = "root";
+    String password = "";
 
     public void getKoneksi() {
         try {

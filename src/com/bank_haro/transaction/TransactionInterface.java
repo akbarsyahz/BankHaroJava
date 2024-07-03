@@ -1,7 +1,9 @@
 package com.bank_haro.transaction;
 
+import java.math.BigDecimal;
+
 public interface TransactionInterface {
-    Integer withDraw();
-    Integer deposit();
-    Integer earlierTransaction();
+    BigDecimal withDraw(BigDecimal amount);
+    BigDecimal deposit(BigDecimal amount);
+    BigDecimal earlierTransaction(BigDecimal amount);
 }

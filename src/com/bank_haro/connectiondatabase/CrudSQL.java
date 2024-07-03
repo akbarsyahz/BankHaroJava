@@ -10,21 +10,8 @@ public class CrudSQL extends ConnectionSQL implements CrudInterface{
     String sql;
 
     @Override
-    public void getData(String table, List<String> nameField, List<?> value) throws SQLException {
-//        try {
-//            connectionSQL.connect();
-//            String sql = "SELECT * FROM " + table + " WHERE " + nameField+ "=" + value;
-////            try (ResultSet statement = connectionSQL.con.createStatement(sql)) {
-////                for (int i = 0; i < value.size(); i++) {
-////                    statement.setObject(i + 1, value.get(i));
-////                }
-////                statement.executeQuery();
-////            }
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        } finally {
-//            connectionSQL.disconnect();
-//        }
+    public void getAllData(String table, List<String> nameField, List<?> value) throws SQLException {
+
     }
 
     @Override
